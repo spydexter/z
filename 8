@@ -1,0 +1,32 @@
+#include<iostream>
+using namespace std;
+class Agent
+{
+protected:
+float commissionRate;
+public:
+Agent(float rate):commissionRate(rate){}
+float calculateCommission(float saleValue){
+return commissionRate*saleValue;
+}
+};
+class Salesperson:public Agent {
+public:
+Salesperson(float rate):Agent(rate){}
+void printCommission(float saleValue){
+float commission=calculateCommission(saleValue);
+cout<<"Agent's commission for sale value $ "<<saleValue<<"is $"<<commission<<endl;
+}
+};
+int main()
+{
+float commissionRate;
+cout<<"Enter the commission rate for the salesperson(in decimal):";
+cin>>commissionRate;
+Salesperson salesAgent(commissionRate);
+float saleValue;
+cout<<"Enter the sale value:$";
+cin>>saleValue;
+salesAgent.printCommission(saleValue);
+return 0;
+}
