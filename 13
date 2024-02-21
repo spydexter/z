@@ -1,0 +1,39 @@
+#include<iostream>
+#include<string>
+using namespace std;
+class Counter {
+public:
+virtual int countWords(const string & text)=0;
+virtual int countCharacters(const string & text)=0;
+};
+class WordCharacterCounter : public Counter {
+public:
+int countWords(const string & text)override {
+int words=0;
+bool inWord=false;
+for(char c:text) {
+if(isalpha(c) && !inWord){
+inWord=true;
+words++;
+}
+else if(!isalpha(c)){
+inWord=false;
+}
+}
+return words;
+}
+int countCharacters(const string& text) override {
+return text.length();
+}
+};
+int main()
+{
+WordCharacterCounter counter;
+string input_text="This is a sample text.";
+int word_count=counter.countWords(input_text);
+int char_count=counter.countCharacters(input_text);
+cout<<"Word count:"<<word_count<<endl;
+cout<<"Character count:"<<char_count<<endl;
+return 0;
+}
+
