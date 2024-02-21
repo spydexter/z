@@ -1,0 +1,62 @@
+#include<iostream>
+using namespace std;
+class TelephoneBill {
+protected:
+double ratePerUnit;
+public:
+TelephoneBill(double rate):ratePerUnit(rate) {}
+virtual double calculateBill(int units) {
+return units * ratePerUnit;
+}
+};
+
+class Residential : public TelephoneBill {
+public:
+Residential(double rate): TelephoneBill(rate) {}
+double calculateBill(int units) override {
+if(units<=100)
+return ratePerUnit*units;
+else
+return ratePerUnit*100+0.6*ratePerUnit*(units-100);
+}
+};
+
+class Business: public TelephoneBill {
+public:
+Business(double rate): TelephoneBill(rate) {}
+double calculateBill(int units) override {
+if(units<=50)
+return ratePerUnit*units;
+else if(units<=150)
+return ratePerUnit*50+0.5* ratePerUnit*(units-50);
+else
+return ratePerUnit*50+0.5*ratePerUnit*100+0.4*ratePerUnit*(units-150);
+}
+};
+
+int main()
+{
+double residentialRate=0.5;
+double businessRate=0.7;
+Residential res(residentialRate);
+Business bus(businessRate);
+int units;
+char customerType;
+cout<<"Entercustomer type (R for Residential,B for Business):";
+cin>>customerType;
+cout<<"Enter units consumed:";
+cin>>units;
+double totalBill;
+if(customerType=='R'){
+totalBill=res.calculateBill(units);
+cout<<"Total bill for Residential customer:$"<< totalBill<<endl;
+}
+else if(customerType=='B') {
+totalBill=bus.calculateBill(units);
+cout<<"Total bill for Business customer:$"<< totalBill<<endl;
+}else
+{
+cout<<"Invalid customer type entered!"<<endl;
+}
+return 0;
+}
