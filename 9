@@ -1,0 +1,71 @@
+#include <iostream>
+using namespace std;
+class NetS
+{
+private: 
+ double nt;//Net sallary
+public:
+NetS(double pr)
+{
+  this->nt=pr;
+}
+double getNetSallary()const
+{
+  return this->nt;  
+}
+};
+class TaxS
+{
+private:
+double tx;
+public:
+//Constructor
+TaxS(double s)
+{
+  this->tx=s;
+}
+//getTaxSallary
+double getTaxSallary()const
+{
+  return this->tx;  
+}
+};
+//Inheritanc
+class Salary:public TaxS,public NetS
+{
+  private:
+double sal;
+public:
+//Constructor
+  Sallary(double a,double b):NetS(a),TaxS(a)
+{
+  this->sal=a+b;
+}
+//getSallary
+double getSalary()const
+{
+  return this->sal;
+}
+//print to stream
+friend ostream& operator<<(ostream& os,Salary& sal)
+{
+  os<<sal.getSalary()<<"$";
+  return os;
+}
+
+
+};
+int main() {
+  double a;
+  double b;
+  cout<<"Net Sallary: ";
+  cin>>a;
+  cout<<"Tax sallary:";
+  cin>>b;
+  Sallary sal(a,b);
+  cout<<sal<<endl;
+  return 0;
+}
+
+
+
