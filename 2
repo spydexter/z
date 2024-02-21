@@ -1,0 +1,22 @@
+#include<iostream>
+using namespace std;
+void swap(int ,float );
+
+int main()
+{ 
+    int a;
+    float b; 
+    cout<<"Enter the Two Numbers to Swap in C++: ";
+    cin>>a>>b;
+    cout<<"\nAfter Swapping of Two Numbers:";
+    swap(a,b);
+    return 0;
+}
+void swap(int x,float y)
+{
+ int temp;
+ temp=x;
+ x=y;
+ y=temp;
+ cout<<"  "<<x<<"   "<<y;
+}
