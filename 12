@@ -1,0 +1,59 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+class student
+
+{
+
+protected:
+      string name;
+      int age;
+ public:
+       virtual void display()=0;
+       virtual void study()=0;
+};
+
+class EngineeringStudent:public student
+
+{
+public:
+     EngineeringStudent(string n,int a){
+     name=n;
+     age=a;
+     }
+     void display() override {
+     cout<<"Engineering Student:"<<name<<",Age:"<<age<<endl;
+     }
+     void study() override {
+     cout<<name<<" is studying engineering"<<endl;
+     }
+     };
+
+class MedicalStudent:public student
+
+{
+public:
+    MedicalStudent(string n,int a){
+    name=n;
+    age=a;
+    }
+    void display() override {
+    cout<<"Medical Student:"<<name<<",Age:"<<age<<endl;
+    }
+    void study() override {
+    cout<<name<<" is studying medical"<<endl;
+    }
+    };
+int main()
+{
+EngineeringStudent engStudent("John",20);
+MedicalStudent medStudent("Emily",22);
+
+engStudent.display();
+engStudent.study();
+
+medStudent.display();
+medStudent.study();
+return 0;
+}
