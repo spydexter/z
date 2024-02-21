@@ -1,0 +1,58 @@
+#include<iostream>
+using namespace std;
+class Academic {
+protected:
+float marks;
+public:
+Academic(float m):marks(m) {}
+char calculateGrade() {
+if(marks>=90)
+return 'A';
+else if(marks>=80)
+return 'B';
+else if(marks>=70)
+return 'c';
+else if(marks>=60)
+return 'D';
+else
+return 'F';
+}
+};
+class Sports:public Academic {
+protected:
+int sportsScore;
+public:
+Sports(float m,int s) :Academic(m),sportsScore(s) {}
+char calculateGrade() {
+char academicGrade = Academic::calculateGrade();
+if(sportsScore>=90)
+return (academicGrade=='A')?'S':'A';
+else if(sportsScore>=80)
+return (academicGrade=='A')?'A':'B';
+else if(sportsScore>=70)
+return (academicGrade=='F')?'F':'C';
+else
+return academicGrade;
+}
+};
+class Student:public Sports {
+public:
+Student(float m,int s) :Sports(m,s) {}
+void displayGrade() {
+char grade=calculateGrade();
+cout<<"AcademicMarks:"<<marks<<",Sports Score:"<<sportsScore<<",Grade:"<<grade<<endl;
+}
+};
+int main()
+{
+float academicMarks;
+int sportsScore;
+cout<<"Enter Academic Marks:";
+cin>>academicMarks;
+cout<<"Enter Sports Score:";
+cin>>sportsScore;
+Student student(academicMarks,sportsScore);
+student.displayGrade();
+return 0;
+}
+
