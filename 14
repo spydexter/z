@@ -1,0 +1,55 @@
+#include<iostream>
+using namespace std;
+class Employee {
+protected:
+float salary;
+public:
+Employee(float sal) : salary(sal) {}
+virtual float calculateNetPay()
+{
+return salary;
+}
+};
+class Deductions:virtual public Employee {
+protected:
+float deductions;
+public:
+Deductions(float sal,float ded) : Employee(sal),deductions(ded) {}
+float calculateNetPay() override {
+return salary-deductions;
+}
+};
+
+class Allowances:virtual public Employee {
+protected:
+float allowances;
+public:
+Allowances(float sal,float allow) : Employee(sal),allowances(allow) {}
+float calculateNetPay() override {
+return salary+allowances;
+}
+};
+
+class SalaryCalculator:public Deductions, public Allowances {
+public:
+SalaryCalculator(float sal,float ded,float allow) : Employee(sal),Deductions(sal,ded),Allowances(sal,allow) {}
+
+float calculateNetPay() override {
+return Deductions::calculateNetPay()+Allowances::calculateNetPay()-salary;
+}
+};
+int main()
+{
+float salary,deductions,allowances;
+cout<<"Enter salary:$";
+cin>>salary;
+cout<<"Enter deductions:$";
+cin>>deductions;
+cout<<"Enter allowances:$";
+cin>>allowances;
+SalaryCalculator emp(salary,deductions,allowances);
+float netPay=emp.calculateNetPay();
+cout<<"Net pay of the employee is: $"<<netPay<<endl;
+return 0;
+}
+
